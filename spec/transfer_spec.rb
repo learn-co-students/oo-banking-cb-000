@@ -83,8 +83,8 @@ describe 'Transfer' do
 
       it "it can only reverse executed transfers" do
         transfer.reverse_transfer
-        expect(amanda.balance).to eq(1000)
-        expect(avi.balance).to eq(1000)
+        expect(amanda.balance).to eq(1050)
+        expect(avi.balance).to eq(950)
       end
     end
   end
