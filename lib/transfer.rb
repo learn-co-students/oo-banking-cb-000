@@ -15,31 +15,27 @@ class Transfer
   end
 
   def execute_transaction
-    if self.valid?
-      if !@sender.transfers.include?(self) && @sender.balance >= @amount
-        @sender.balance -= @amount
-        @receiver.balance += @amount
-        @sender.transfers << self
-        @status = 'complete'
-      elsif @sender.balance < @amount
-        @status = 'rejected'
-        "Transaction rejected. Please check your account balance."
-      end
+    if self.valid? && !@sender.transfers.include?(self) && @sender.balance >= @amount
+      @sender.balance -= @amount
+      @receiver.balance += @amount
+      @sender.transfers << self
+      @status = 'complete'
+    elsif @sender.balance < @amount
+      @status = 'rejected'
+      "Transaction rejected. Please check your account balance."
     end
   end
 
   def reverse_transfer
-    if self.valid?
-      if @sender.transfers.include?(self) && @receiver.balance >= @amount
-	       @sender.balance += @amount
-	       @receiver.balance -= @amount
-	       @sender.transfers.delete(self)
-	       @status = 'reversed'
-	     elsif @receiver.balance < @amount
-	       @status = 'rejected'
-	       "Transaction rejected. Please check your account balance."
-	     end
-    end
+    if self.valid? && @sender.transfers.include?(self) && @receiver.balance >= @amount
+       @sender.balance += @amount
+       @receiver.balance -= @amount
+       @sender.transfers.delete(self)
+       @status = 'reversed'
+     elsif @receiver.balance < @amount
+       @status = 'rejected'
+       "Transaction rejected. Please check your account balance."
+     end
   end
 
 end
