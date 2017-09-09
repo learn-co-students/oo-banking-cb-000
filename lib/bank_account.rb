@@ -17,11 +17,11 @@ class BankAccount
   end
 
   def valid?
-    @status == 'open' && @balance > 0 ? true : false
+    @status == 'open' && @balance > 0
   end
 
   def close_account
     # binding.pry
-    @status ? @status = 'closed' : @status = 'open'
+    @status = 'closed'
   end
 end
