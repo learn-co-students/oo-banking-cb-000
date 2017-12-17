@@ -20,6 +20,7 @@ class BankAccount
 
    # can display its balance
    def display_balance
+     "Your balance is $#{self.balance}."
    end
 
    # is valid with an open status and a balance greater than 0
