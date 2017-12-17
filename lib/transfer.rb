@@ -10,6 +10,23 @@ class Transfer
     @sender = sender
     @receiver = receiver
     @status = 'pending'
-    @amount = amount 
+    @amount = amount
+  end
+
+  # can check that both accounts are valid
+  # calls on the sender and reciever's #valid? methods
+  def valid?
+    sender.valid? && receiver.valid?
+  end
+
+  # can execute a successful transaction between two accounts
+  # each transfer can only happen once
+  # rejects a transfer if the sender doesn't have a valid account
+  def execute_transaction
+  end
+
+  # can reverse a transfer between two accounts
+  # it can only reverse executed transfers
+  def reverse_transfer
   end
 end
