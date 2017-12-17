@@ -1,5 +1,6 @@
 class Transfer
-  attr_accessor :sender, :receiver, :status, :amount
+  attr_reader :sender, :receiver, :amount
+  attr_accessor :status
 
   # can initialize a Transfer
   # initializes with a sender
@@ -23,6 +24,14 @@ class Transfer
   # each transfer can only happen once
   # rejects a transfer if the sender doesn't have a valid account
   def execute_transaction
+    if valid? && self.status == 'pending' && sender.balance > amount
+      receiver.balance += amount
+      sender.balance -= amount
+      self.status = 'complete'
+    else
+      self.status = 'rejected'
+      "Transaction rejected. Please check your account balance."
+    end
   end
 
   # can reverse a transfer between two accounts
