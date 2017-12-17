@@ -37,5 +37,10 @@ class Transfer
   # can reverse a transfer between two accounts
   # it can only reverse executed transfers
   def reverse_transfer
+    if valid? && self.status == 'complete' && receiver.balance > amount
+      receiver.balance -= amount
+      sender.balance += amount
+      self.status = 'reversed'
+    end
   end
 end
