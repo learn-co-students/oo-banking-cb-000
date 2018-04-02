@@ -10,9 +10,7 @@ class Transfer
   end
 
   def valid?
-    false if !sender.valid? || !receiver.valid?
-    false if sender.balance < amount
-    true
+    !sender.valid? || !receiver.valid? || sender.balance < amount ? false : true
   end
 
   def execute_transaction
@@ -32,4 +30,5 @@ class Transfer
       @receiver.balance -= @amount
       @status = "reversed"
     end
+  end
 end
