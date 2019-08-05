@@ -14,7 +14,7 @@ class Transfer
   end
 
   def execute_transaction
-    if status != 'complete'
+    if status == 'pending' && valid?
       sender.balance < amount ? reject_transfer : complete_transfer
     else
       "This transfer has already been completed"
