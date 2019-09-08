@@ -19,11 +19,11 @@ attr_reader :sender, :receiver, :amount
     if valid? && @status == 'pending' && sender.balance > @amount
       complete_transfer
       elsif
-        valid? && @status == 'pending' && sender.balance < @amount
-        reject_transfer
-      elsif
         @status == 'complete'
         "This transfer has already been completed"
+      else
+        reject_transfer
+        #binding.pry
     end
   end
 
